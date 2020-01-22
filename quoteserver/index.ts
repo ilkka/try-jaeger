@@ -29,7 +29,7 @@ function initTracer(serviceName: string): JaegerTracer {
   return initJaegerTracer(config, options);
 }
 
-const tracer = initTracer("try-jaeger");
+const tracer = initTracer("quoteserver");
 
 const quotes = [
   "On kaksi osaa ihmisiä. Joku vetää huumeita, joku urheilee, joku vetää itsensä loppuun ja joku vaan nukkuu. Minä kuulun siihen porukkaan, joka nukkuu, urheilee, rakastelee ja hakkaa itseään ja voipi olla, että siinä joskus osuu toiseenkin ihmiseen.",
@@ -62,7 +62,7 @@ const quotes = [
 app.get("/quote", async (req, res) => {
   const parentSpan = tracer.extract("http_headers", req.headers);
   const span = tracer.startSpan(
-    "quoteserver",
+    "getQuote",
     parentSpan ? { childOf: parentSpan } : {}
   );
   await new Promise(resolve =>

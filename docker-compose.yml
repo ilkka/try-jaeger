@@ -3,11 +3,31 @@ services:
   webapp:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     environment:
       JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: 6832
+      JAEGER_SAMPLER_TYPE: remote
+      JAEGER_SAMPLER_PARAM: 1
+      JAEGER_SAMPLER_MANAGER_HOST_PORT: http://jaeger:5778/sampling
+      BACKEND_URL: http://backend:3000
     ports:
       - "3000:3000"
+  backend:
+    build:
+      context: ./quoteserver
+      dockerfile: Dockerfile
+      args:
+        port: 3000
+    environment:
+      PORT: 3000
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: 6832
+      JAEGER_SAMPLER_TYPE: remote
+      JAEGER_SAMPLER_PARAM: 1
+      JAEGER_SAMPLER_MANAGER_HOST_PORT: http://jaeger:5778/sampling
+    ports:
+      - "3001:3000"
   jaeger:
     image: jaegertracing/all-in-one:1.16.0
     environment:

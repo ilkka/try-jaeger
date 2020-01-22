@@ -26,5 +26,5 @@ function initTracer(serviceName: string): JaegerTracer {
   return initJaegerTracer(config, options);
 }
 
-const tracer = initTracer("try-jaeger");
+const tracer = initTracer("webapp");
 export default tracer;

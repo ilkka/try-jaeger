@@ -4,4 +4,6 @@ out
 .git
 .gitignore
 .dockerignore
+.vscode
 Dockerfile
+quoteserver
