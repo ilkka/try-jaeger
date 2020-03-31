@@ -13,7 +13,7 @@
     "autoprefixer": "^9.7.4",
     "axios": "^0.19.2",
     "jaeger-client": "^3.17.1",
-    "next": "^9.2.0",
+    "next": "^9.3.2",
     "postcss-loader": "^3.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
